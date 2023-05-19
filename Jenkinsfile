@@ -16,11 +16,16 @@ pipeline {
             }
         }
 
-        stage ('Deploy') {
-            steps {
-                deploy adapters: [tomcat9(credentialsId: '0ec60cd3-c147-467b-bc23-ceabd7954e28', path: '', url: 'http://localhost:8081/')], contextPath: 'jenkins_calci', onFailure: false, war: '**/*.war'
-                echo "Deploy successful"
-            }
-        }
+//         stage ('Deploy') {
+20
+//             steps {
+21
+//                 deploy adapters: [tomcat9(credentialsId: '0ec60cd3-c147-467b-bc23-ceabd7954e28', path: '', url: 'http://localhost:8081/')], contextPath: 'jenkins_calci', onFailure: false, war: '**/*.war'
+22
+//                 echo "Deploy successful"
+23
+//             }
+24
+//         }
     }
 }
