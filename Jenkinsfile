@@ -21,9 +21,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                    systemctl stop your-app
                     java -cp target/your-app.jar hello.HelloWorld
-                    systemctl start your-app
                 '''
             }
         }
