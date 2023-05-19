@@ -18,19 +18,18 @@ pipeline {
             }
         }
 
-        stages {
         stage('Deployment') {
+            environment {
+                SOURCE_EC2_IP = '44.197.218.22'
+                SOURCE_PRIVATE_KEY = credentials(' /home/ubuntu/.ssh/id_rsa')
+                TARGET_EC2_IP = '3.218.207.21'
+                TARGET_PRIVATE_KEY = credentials('/home/ubuntu/.ssh/id_rsa')
+            }
+
             steps {
-                script {
-                    // SSH into the target EC2 instance
-                    sshagent(credentials: ['3.218.207.21']) {
-                        sh '''
-                           
-                            # Start the application
-                            ssh -i ubuntu-jenins.pem ubuntu@3.218.207.21 sudo systemctl start HelloWorld.java
-                        '''
-                    }
-                }
+                sh "scp -i ${.ssh/id_rsa} your-app.jar ubuntu-jenins.pem ubuntu@${44.197.218.22}:~/"
+                sh "ssh -i ${.ssh/id_rsa} ubuntu-jenins.pem ununtu@${3.218.207.21} 'scp ~/your-app.jar ubuntu@${3.218.207.21}:~/ && java -jar your-app.jar &'"
+            }
+        }
     }
 }
-
