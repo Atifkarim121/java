@@ -21,9 +21,9 @@ pipeline {
         stage('Deployment') {
             environment {
                 SOURCE_EC2_IP = '44.197.218.22'
-                SOURCE_PRIVATE_KEY = credentials('/home/ubuntu/.ssh/id_rsa')
+                SOURCE_PRIVATE_KEY = credentials('/home/ubuntu/.ssh')
                 TARGET_EC2_IP = '3.218.207.21'
-                TARGET_PRIVATE_KEY = credentials('/home/ubuntu/.ssh/id_rsa')
+                TARGET_PRIVATE_KEY = credentials('/home/ubuntu/.ssh')
             }
 
             steps {
