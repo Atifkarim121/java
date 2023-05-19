@@ -7,27 +7,18 @@ pipeline {
                     echo "Checkout successful";
                 } 
             }
-            stage ('Compile') {  
-                  steps{
-                    bat label: '', script: 'mvn compile'
-                    echo "test successful";
-                    
-                } 
-            }
+           
+          }
             stage ('Build') {  
                   steps{
-                    bat label: '', script: 'mvn clean'
-                    bat label: '', script: 'mvn package'
+                    bat label: '', script: 'mvn verify'
+                    bat label: '', script: 'mvn clesn install'
                     echo "build successful";
                     
                 } 
             }
-             stage ('Test') {  
-                  steps{
-                    bat label: '', script: 'mvn test'
-                    echo "test successful";
-                } 
-            }
+             
+          }
             
         stage ('Deploy') {
             steps{
@@ -35,10 +26,7 @@ pipeline {
              echo "Deploy successful";
             }
         }
-        stage ('Monitor') { 
-           steps{ 
-             echo "Now you can monitor!";
-           }
+        
         }
     }
 }
