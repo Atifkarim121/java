@@ -21,9 +21,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
+                    ls -la target # List files in the target directory
                     java -cp target/your-app.jar hello.HelloWorld
                 '''
             }
         }
     }
 }
+
