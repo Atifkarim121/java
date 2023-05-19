@@ -18,13 +18,19 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stages {
+        stage('Deployment') {
             steps {
-                sh '''
-                    java -cp target/your-app.jar hello.HelloWorld
-                '''
-            }
-        }
+                script {
+                    // SSH into the target EC2 instance
+                    sshagent(credentials: ['3.218.207.21']) {
+                        sh '''
+                           
+                            # Start the application
+                            ssh -i ubuntu-jenins.pem ubuntu@3.218.207.21 sudo systemctl start HelloWorld.java
+                        '''
+                    }
+                }
     }
 }
 
