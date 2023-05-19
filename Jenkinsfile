@@ -15,5 +15,18 @@ pipeline {
                 echo "Build successful"
             }
         }
+    stage('Deploy') {
+            steps {
+                sshagent(['your-ssh-credentials-id']) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no -i /path/to/your/key.pem ec2-user@your-ec2-instance-ip 'sudo systemctl stop your-app'
+                        scp -i /path/to/your/key.pem target/your-app.jar ec2-user@your-ec2-instance-ip:/path/to/deployment/folder/
+                        ssh -o StrictHostKeyChecking=no -i /path/to/your/key.pem ec2-user@your-ec2-instance-ip 'sudo systemctl start your-app'
+                    '''
+                }
+            }
+        }
+    
     }
+    
 }
